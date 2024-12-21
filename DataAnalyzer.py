@@ -30,8 +30,17 @@ def get_file_path(config, key, prompt):
     return path
 
 def main():
+    
+    # Load or initialize configuration
+    config = load_config()
+
+    # Get file paths from config or prompt user
+    input_file_path = get_file_path(config, "input_file_path", "Enter the path to the input CSV file: ")
+    output_clustered_file_path = get_file_path(config, "output_clustered_file_path", "Enter the path to save the clustered data Excel file: ")
+    output_original_with_clusters_path = get_file_path(config, "output_original_with_clusters_path", "Enter the path to save the original data with clusters Excel file: ")
+    
     # Initialize data loader and load data
-    loader = DataLoader('E:\\Documents\\Blazestone\\etsyData\\airpods_analytics20240617-9-fuojw6.csv')
+    loader = DataLoader(input_file_path)
     original_data = loader.load_csv()
 
     # Initialize and process the data
@@ -57,12 +66,12 @@ def main():
     clustered_data = clusterer.perform_clustering()
         
     # Save the DataFrame with the cluster labels to a new Excel file
-    clustered_data.to_excel('E:\\Documents\\Blazestone\\etsyData\\processed_data_with_clusters.xlsx', index=False)
+    clustered_data.to_excel(output_clustered_file_path, index=False)
 
     # Optionally, save the original data with cluster labels
     original_data['Cluster'] = clustered_data['Cluster']
 
-    original_data.to_excel('E:\\Documents\\Blazestone\\etsyData\\original_data_with_clusters.xlsx', index=False)
+    original_data.to_excel(output_original_with_clusters_path, index=False)
     
     # Initialize visualizer with category mappings
     visualizer = DataVisualizer(original_data, preprocessed_data, category_mappings)
