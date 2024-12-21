@@ -1,0 +1,5 @@
+{
+    "input_file_path": "E:\\Documents\\Blazestone\\etsyData\\airpods_analytics20240617-9-fuojw6.csv",
+    "output_clustered_file_path": "E:\\Documents\\Blazestone\\etsyData\\processed_data_with_clusters.xlsx",
+    "output_original_with_clusters_path": "E:\\Documents\\Blazestone\\etsyData\\original_data_with_clusters.xlsx"
+}
